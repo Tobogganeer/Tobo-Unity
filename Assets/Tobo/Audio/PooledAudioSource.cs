@@ -2,39 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PooledAudioSource : MonoBehaviour
+namespace Tobo.Audio
 {
-    private Transform originalParent;
-
-    private void Awake()
+    public class PooledAudioSource : MonoBehaviour
     {
-        originalParent = transform.parent;
-        gameObject.SetActive(false);
-    }
+        private Transform originalParent;
 
-    public void DisableAfterTime(float seconds)
-    {
-        if (!gameObject.activeInHierarchy)
+        private void Awake()
         {
+            originalParent = transform.parent;
             gameObject.SetActive(false);
-            transform.SetParent(originalParent);
-            return;
         }
 
-        StopAllCoroutines();
-        StartCoroutine(DisableAfterSeconds(seconds));
-    }
+        public void DisableAfterTime(float seconds)
+        {
+            if (!gameObject.activeInHierarchy)
+            {
+                gameObject.SetActive(false);
+                transform.SetParent(originalParent);
+                return;
+            }
 
-    private IEnumerator DisableAfterSeconds(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
+            StopAllCoroutines();
+            StartCoroutine(DisableAfterSeconds(seconds));
+        }
 
-        gameObject.SetActive(false);
-        transform.SetParent(originalParent);
-    }
+        private IEnumerator DisableAfterSeconds(float seconds)
+        {
+            yield return new WaitForSeconds(seconds);
 
-    private void OnDestroy()
-    {
-        AudioMaster.OnAudioSourceDestroyed(this);
+            gameObject.SetActive(false);
+            transform.SetParent(originalParent);
+        }
+
+        private void OnDestroy()
+        {
+            AudioMaster.OnAudioSourceDestroyed(this);
+        }
     }
 }
