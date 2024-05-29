@@ -3,17 +3,20 @@ using UnityEngine;
 
 // https://forum.unity.com/threads/how-to-get-name-or-number-of-selected-layer.445296/
 
-[CustomPropertyDrawer(typeof(LayerAttribute))]
-public class LayerDrawer : PropertyDrawer
+namespace Tobo.Attributes.Editor
 {
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    [CustomPropertyDrawer(typeof(LayerAttribute))]
+    public class LayerDrawer : PropertyDrawer
     {
-        if (property.propertyType != SerializedPropertyType.Integer)
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            EditorGUI.LabelField(position, "The property has to be a layer for LayerAttribute to work!");
-            return;
-        }
+            if (property.propertyType != SerializedPropertyType.Integer)
+            {
+                EditorGUI.LabelField(position, "The property has to be a layer for LayerAttribute to work!");
+                return;
+            }
 
-        property.intValue = EditorGUI.LayerField(position, label, property.intValue);
+            property.intValue = EditorGUI.LayerField(position, label, property.intValue);
+        }
     }
 }

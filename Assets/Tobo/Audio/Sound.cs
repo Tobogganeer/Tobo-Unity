@@ -85,6 +85,8 @@ namespace Tobo.Audio
             return new Audio(this);
         }
 
+        //public static bool Exists(ID id) => AudioManager.SoundExists(id);
+
         #region Play
         public void Play(Vector3 position)
         {
@@ -106,6 +108,17 @@ namespace Tobo.Audio
             AudioManager.PlayLocal2D(this);
         }
         #endregion
+
+        public static Sound CreateInternal(List<AudioClip> clips, bool is2D, AudioCategory category)
+        {
+            Sound s = CreateInstance<Sound>();
+
+            s.clips = clips.ToArray();
+            s.is2d = is2D;
+            s.category = category;
+
+            return s;
+        }
     }
 
     public static class SoundIDExtensions

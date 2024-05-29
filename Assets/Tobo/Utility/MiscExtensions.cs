@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class MiscExtensions
+namespace Tobo.Util
 {
-    public static bool Contains(this LayerMask mask, int layer)
+    public static class MiscExtensions
     {
-        return mask == (mask | (1 << layer));
+        public static bool Contains(this LayerMask mask, int layer)
+        {
+            return mask == (mask | (1 << layer));
+        }
     }
 }

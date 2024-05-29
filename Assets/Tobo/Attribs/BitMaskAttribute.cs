@@ -1,10 +1,13 @@
 using UnityEngine;
 
-public class BitMaskAttribute : PropertyAttribute
+namespace Tobo.Attributes
 {
-    public System.Type propType;
-    public BitMaskAttribute(System.Type aType)
+    public class BitMaskAttribute : PropertyAttribute
     {
-        propType = aType;
+        public System.Type propType;
+        public BitMaskAttribute(System.Type aType)
+        {
+            propType = aType;
+        }
     }
 }

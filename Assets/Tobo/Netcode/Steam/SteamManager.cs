@@ -46,8 +46,10 @@ namespace Tobo.Net
                 return;
             }
 
+#if TOBO_NET
             SteamNetworkingUtils.InitRelayNetworkAccess();
             instance.CheckForCommandLineJoins();
+#endif
 
             if (SteamClient.IsValid)
             {
@@ -137,7 +139,7 @@ namespace Tobo.Net
         }
 
         #region Steam Networking
-#if MULTIPLAYER
+#if TOBO_NET
         private void CheckForCommandLineJoins()
         {
             Invoke(nameof(CheckForArgsDelayed), 1.0f);

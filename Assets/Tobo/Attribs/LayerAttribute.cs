@@ -1,5 +1,8 @@
 using System;
 using UnityEngine;
 
-[AttributeUsage(AttributeTargets.Field)]
-public class LayerAttribute : PropertyAttribute { }
+namespace Tobo.Attributes
+{
+    [AttributeUsage(AttributeTargets.Field)]
+    public class LayerAttribute : PropertyAttribute { }
+}

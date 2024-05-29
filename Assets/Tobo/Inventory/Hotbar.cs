@@ -2,55 +2,67 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hotbar : MonoBehaviour
+namespace Tobo.Inventory
 {
-    public InventoryGUI gui;
-    public ItemSlot[] slots;
-    public bool flipScrollDirection;
-
-    int numSlots;
-    int selectedIndex; // Index into local slot array
-
-    // Actual slot index in inventory, not local array
-    public int SelectedSlot { get; private set; }
-
-    private void Start()
+    public class Hotbar : MonoBehaviour
     {
-        numSlots = slots.Length;
-    }
+        public InventoryGUI gui;
+        public ItemSlot[] slots;
+        public bool flipScrollDirection;
 
-    private void Update()
-    {
-        int old = selectedIndex;
+        int numSlots;
+        int selectedIndex; // Index into local slot array
 
-        float scroll = PlayerInputs.Scroll;
+        // Actual slot index in inventory, not local array
+        public int SelectedSlot { get; private set; }
 
-        if (flipScrollDirection)
-            scroll *= -1f; // Flip it
-
-        if (scroll > 0)
+        private void Start()
         {
-            selectedIndex++;
-            if (selectedIndex >= numSlots)
-                selectedIndex = 0;
-        }
-        else if (scroll < 0)
-        {
-            selectedIndex--;
-            if (selectedIndex < 0)
-                selectedIndex = numSlots - 1;
+            numSlots = slots.Length;
         }
 
-        // Number keys
-        for (int i = 0; i < numSlots; i++)
+        private void Update()
         {
-            if (PlayerInputs.NumberKeys[i].WasPressedThisFrame())
-                selectedIndex = i;
+            int old = selectedIndex;
+
+            float scroll = UnityEngine.InputSystem.Mouse.current.scroll.value.y;
+
+            if (flipScrollDirection)
+                scroll *= -1f; // Flip it
+
+            if (scroll > 0)
+            {
+                selectedIndex++;
+                if (selectedIndex >= numSlots)
+                    selectedIndex = 0;
+            }
+            else if (scroll < 0)
+            {
+                selectedIndex--;
+                if (selectedIndex < 0)
+                    selectedIndex = numSlots - 1;
+            }
+
+            // Number keys
+            /*
+            for (int i = 0; i < numSlots; i++)
+            {
+                if (PlayerInputs.NumberKeys[i].WasPressedThisFrame())
+                    selectedIndex = i;
+            }
+            */
+
+
+            // Change the colours
+            slots[old].graphicState = ItemSlot.GraphicState.Default;
+            slots[selectedIndex].graphicState = ItemSlot.GraphicState.Highlighted;
         }
 
-
-        // Change the colours
-        slots[old].graphicState = ItemSlot.GraphicState.Default;
-        slots[selectedIndex].graphicState = ItemSlot.GraphicState.Highlighted;
+        public void SelectSlot(int slot)
+        {
+            slots[selectedIndex].graphicState = ItemSlot.GraphicState.Default;
+            selectedIndex = Mathf.Clamp(slot, 0, slots.Length - 1);
+            slots[selectedIndex].graphicState = ItemSlot.GraphicState.Highlighted;
+        }
     }
 }

@@ -1,9 +1,7 @@
-//#define MULTIPLAYER
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-#if MULTIPLAYER
+#if TOBO_NET
 using Tobo.Net;
 #endif
 
@@ -168,7 +166,7 @@ namespace Tobo.Audio
         public static void PlayAudio(Audio audio)
         {
             // Send over network
-#if MULTIPLAYER
+#if TOBO_NET
             AudioPacket p = new AudioPacket(audio);
 
             if (NetworkManager.IsServer)
@@ -237,7 +235,7 @@ namespace Tobo.Audio
     }
 
     public class Audio
-#if MULTIPLAYER
+#if TOBO_NET
     : IBufferStruct
 #endif
     {
@@ -352,7 +350,7 @@ namespace Tobo.Audio
         #endregion
 
         #region Net
-#if MULTIPLAYER
+#if TOBO_NET
         public void Serialize(ByteBuffer message)
         {
             message.Add((ushort)ID);

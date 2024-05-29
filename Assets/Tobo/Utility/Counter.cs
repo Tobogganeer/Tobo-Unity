@@ -2,27 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Set it to a value, and then check until it becomes 0
-/// </summary>
-public struct Counter
+namespace Tobo.Util
 {
-    float end;
-
-    public static implicit operator float(Counter c)
+    /// <summary>
+    /// Set it to a value, and then check until it becomes 0
+    /// </summary>
+    public struct Counter
     {
-        return c.end - Time.time;
-    }
+        float end;
 
-    public static implicit operator Counter(float seconds)
-    {
-        return new Counter { end = Time.time + seconds };
-    }
+        public static implicit operator float(Counter c)
+        {
+            return c.end - Time.time;
+        }
 
-    public override string ToString()
-    {
-        // Implicitly convert to float, then return it
-        return (+this).ToString();
+        public static implicit operator Counter(float seconds)
+        {
+            return new Counter { end = Time.time + seconds };
+        }
+
+        public override string ToString()
+        {
+            // Implicitly convert to float, then return it
+            return (+this).ToString();
+        }
     }
 }
 

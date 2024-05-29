@@ -1,9 +1,12 @@
 {
-    "name": "Tobo.Audio",
-    "rootNamespace": "Tobo.Audio",
+    "name": "Tobo.Inventory",
+    "rootNamespace": "Tobo.Inventory",
     "references": [
         "GUID:7314d173273003b46bedcbf47d74ef07",
-        "GUID:09a37e0ee9494c442b6c3ddf7591c7c7"
+        "GUID:ca09bd9224f380e4593ebac7cbf42489",
+        "GUID:adc2e0741c6a95e428856f56c6864ff5",
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
