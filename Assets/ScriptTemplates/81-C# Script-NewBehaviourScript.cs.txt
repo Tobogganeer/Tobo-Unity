@@ -1,0 +1,19 @@
+using System.Collections.Generic;
+using UnityEngine;
+using Tobo.Util;
+using Tobo.Attributes;
+
+    #ROOTNAMESPACEBEGIN#
+public class #SCRIPTNAME# : MonoBehaviour
+{
+    void Start()
+    {
+        #NOTRIM#
+    }
+
+    void Update()
+    {
+        #NOTRIM#
+    }
+}
+#ROOTNAMESPACEEND#

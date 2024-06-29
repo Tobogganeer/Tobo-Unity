@@ -802,7 +802,7 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Standalone: MULTIPLAYER;STEAM
+    Standalone: TOBO_NET;STEAM
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
