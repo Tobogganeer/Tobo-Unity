@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if STEAM
 using Steamworks;
 using Steamworks.Data;
 using System.Runtime.InteropServices;
@@ -426,3 +427,4 @@ namespace Tobo.Net
         FriendsOnly,
     }
 }
+#endif

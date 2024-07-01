@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+#if STEAM
 using Steamworks;
 using Steamworks.Data;
 using System.Runtime.InteropServices;
@@ -235,3 +236,4 @@ namespace Tobo.Net
         }
     }
 }
+#endif
