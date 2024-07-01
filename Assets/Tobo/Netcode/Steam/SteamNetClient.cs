@@ -188,16 +188,16 @@ namespace Tobo.Net
         {
             if (NetworkManager.Quitting) return;
 
-            //Debug.Log("Message received from SERVER: " + netMessage.connection + ", Channel ID: " + netMessage.channel + ", Data length: " + netMessage.length);
-            ByteBuffer buf = ByteBuffer.Get();
-            buf.ReadData(data, size);
-            //Debug.Log($"GOT SERVER MES: {buf.Peek<uint>()} -> {Packet.HashCache<S_Welcome>.ID}");
-
             if (size < 4)
             {
                 Debug.LogError("Error: Received message with length <4!");
                 return;
             }
+
+            //Debug.Log("Message received from SERVER: " + netMessage.connection + ", Channel ID: " + netMessage.channel + ", Data length: " + netMessage.length);
+            ByteBuffer buf = ByteBuffer.Get();
+            buf.ReadData(data, size);
+            //Debug.Log($"GOT SERVER MES: {buf.Peek<uint>()} -> {Packet.HashCache<S_Welcome>.ID}");
 
             if (internalHandle.TryGetValue(buf.Peek<uint>(), out var action))
             {
