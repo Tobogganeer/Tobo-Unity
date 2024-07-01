@@ -14,27 +14,22 @@ namespace Tobo.Net
 
         private void Start()
         {
-            instance = this; // Attached to app
+            if (instance == null)
+            {
+                instance = this;
+                DontDestroyOnLoad(this);
+            }
+            else
+            {
+                Destroy(this);
+                return;
+            }
 
             if (Application.isEditor && !useSteamInEditor)
             {
                 Destroy(this);
                 return;
             }
-
-            /*
-            if (instance == null)
-            {
-                
-                // Attached to App object
-                //DontDestroyOnLoad(this);
-            }
-            else
-            {
-                Destroy(gameObject);
-                return;
-            }
-            */
 
             try
             {
@@ -48,7 +43,8 @@ namespace Tobo.Net
 
 #if TOBO_NET
             SteamNetworkingUtils.InitRelayNetworkAccess();
-            instance.CheckForCommandLineJoins();
+            if (NetworkManager.Instance.useSteamTransport)
+                instance.CheckForCommandLineJoins();
 #endif
 
             if (SteamClient.IsValid)
@@ -112,27 +108,15 @@ namespace Tobo.Net
 
         private void OnDestroy()
         {
-#if STEAM
-            if (NetworkManager.Instance != null && NetworkManager.Instance.useSteamTransport)
-#endif
-            {
-                Debug.Log("Shutting down Steam...");
-                SteamClient.Shutdown();
-            }
+            SteamClient.Shutdown();
         }
 
         private void Update()
         {
-
             if (!SteamClient.IsValid)
             {
-//#if STEAM
-//                if (NetworkManager.Instance != null && NetworkManager.Instance.useSteamTransport)
-//#endif
-//                {
                 Debug.LogWarning("Re-initializing steam client...");
                 SteamClient.Init(appID, false);
-//                }
             }
 
             SteamClient.RunCallbacks();

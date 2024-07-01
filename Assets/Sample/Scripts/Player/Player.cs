@@ -13,7 +13,8 @@ public class Player : MonoBehaviour
 
     public NetTransform netTransform;
 
-    public bool LocalPlayer => ID == NetworkManager.MyID;
+    public static Player Local => All[NetworkManager.MyID];
+    public bool IsLocalPlayer => ID == NetworkManager.MyID;
     public Vector3 Position => transform.position;
 
     Transform cam;
@@ -21,7 +22,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        if (LocalPlayer)
+        if (IsLocalPlayer)
         {
             cam = GetComponentInChildren<Camera>().transform;
             LobbyCam.Disable(cam);
