@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEditor;
 using static System.IO.Path;
 using System.IO;
-using Tobo.Util.Editor;
 
 namespace Tobo.Audio.Editor
 {
@@ -24,13 +23,6 @@ namespace Tobo.Audio.Editor
         bool batchMode = true;
 
         SerializedObject target;
-
-
-        [MenuItem("Audio/Fill Sounds")]
-        public static void FillSounds()
-        {
-            LibraryUtil.FillLibrary<SoundLibrary, Sound>(nameof(SoundLibrary.sounds));
-        }
 
         [MenuItem("Audio/Sound Creator")]
         public static void ShowWindow()
@@ -119,7 +111,7 @@ namespace Tobo.Audio.Editor
             Sound s = Sound.CreateInternal(clips, is2D, category);
             AssetDatabase.CreateAsset(s, Combine(path, fileName));
             AssetDatabase.Refresh();
-            FillSounds();
+            SoundLibrary.FillSounds();
         }
 
         void SaveBatch(string path)
@@ -132,7 +124,7 @@ namespace Tobo.Audio.Editor
                 AssetDatabase.CreateAsset(s, Combine(path, clips[i].name + ".asset"));
             }
             AssetDatabase.Refresh();
-            FillSounds();
+            SoundLibrary.FillSounds();
         }
 
         void DisabledLabel(string label, string text)

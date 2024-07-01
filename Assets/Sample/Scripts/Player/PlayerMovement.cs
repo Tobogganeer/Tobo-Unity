@@ -17,11 +17,11 @@ public class PlayerMovement : MonoBehaviour
     public float maxAirSpeedFactor = 1.1f; // For limiting bhopping
     public float groundAcceleration = 20f;
     public float airAcceleration = 2f;
-    public AnimationCurve accelDotFactor = new AnimationCurve(new Keyframe(-1, 2), new Keyframe(0, 1), new Keyframe(0, 1));
+    public AnimationCurve accelDotFactor = new AnimationCurve(new Keyframe(-1, 2), new Keyframe(0, 1), new Keyframe(1, 1));
     public float accelLerpSpeed = 10f;
     public float groundMaxAccelerationForce = 10f;
     public float airMaxAccelerationForce = 3f;
-    public AnimationCurve accelForceDotFactor = new AnimationCurve(new Keyframe(-1, 2), new Keyframe(0, 1), new Keyframe(0, 1));
+    public AnimationCurve accelForceDotFactor = new AnimationCurve(new Keyframe(-1, 2), new Keyframe(0, 1), new Keyframe(1, 1));
     //public float friction = 0.3f;
     public float maxJumpHeight = 1f;
     public float jumpChargeTime = 0.5f;
@@ -167,7 +167,7 @@ public class PlayerMovement : MonoBehaviour
 
         neededAccel = Vector3.ClampMagnitude(neededAccel, maxAccel);
 
-        rb.AddForce(neededAccel);
+        rb.AddForce(neededAccel, ForceMode.Acceleration);
     }
 
     /*

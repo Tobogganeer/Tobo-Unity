@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+using Tobo.Util.Editor;
+#endif
 
 namespace Tobo.Inventory
 {
@@ -9,5 +13,13 @@ namespace Tobo.Inventory
     {
         [Header("Fill through Menu")]
         public Item[] items;
+
+#if UNITY_EDITOR
+        [MenuItem("Inventory/Collect Items")]
+        static void FillItems()
+        {
+            LibraryUtil.FillLibrary<ItemLibrary, Item>(nameof(ItemLibrary.items));
+        }
+#endif
     }
 }

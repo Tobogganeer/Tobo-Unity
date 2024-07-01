@@ -46,10 +46,11 @@ namespace Tobo.Audio
                 soundsDictionary.Add(soundLibrary.sounds[i].SoundID, soundLibrary.sounds[i]);
             }
 
+            // Make sure we have a 'None' sound
             if (!soundsDictionary.ContainsKey(Sound.ID.None))
-            {
-                throw new System.Exception("AudioManager requires a sound with ID " + Sound.ID.None + "!");
-            }
+                soundsDictionary.Add(Sound.ID.None, ScriptableObject.CreateInstance<Sound>());
+            //throw new System.Exception("AudioManager requires a sound with ID " + Sound.ID.None + "!");
+            
             /*
             clips.Clear();
             clipNameToIndex.Clear();

@@ -42,8 +42,8 @@ namespace Tobo.Net
                 return 0;
             }
         }
-        public static bool IsServer => SinglePlayer || (Instance.server != null && Instance.server.Started);
-        public static bool ConnectedToServer => SinglePlayer || (Instance.client != null && Instance.client.IsConnected);
+        public static bool IsServer => Instance == null || SinglePlayer || (Instance.server != null && Instance.server.Started);
+        public static bool ConnectedToServer => SinglePlayer || Instance == null || (Instance.client != null && Instance.client.IsConnected);
         public static bool Quitting { get; private set; }
         public static bool SinglePlayer { get; private set; }
         static bool initedSockets;
