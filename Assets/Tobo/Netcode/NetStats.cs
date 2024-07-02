@@ -14,6 +14,8 @@ namespace Tobo.Net
         public float secondsPerUpdate = 1;
         private float oldSecondsPerUpdate;
 
+        // TODO: Implement with new netcode
+
         /*
         private void SlowUpdate()
         {

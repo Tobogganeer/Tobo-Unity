@@ -109,6 +109,7 @@ namespace Tobo.Net
 
         private void OnDestroy()
         {
+            Debug.Log("OnDestroy from SteamManager...");
             SteamClient.Shutdown();
         }
 

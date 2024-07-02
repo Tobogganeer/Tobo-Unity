@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 5803415014187411952}
   - component: {fileID: -7384753933230478939}
   - component: {fileID: 5787449688861772184}
-  - component: {fileID: -9042150861625775508}
+  - component: {fileID: -5576342316104797672}
   - component: {fileID: -4845893212691351767}
+  - component: {fileID: 3755977251444370959}
   m_Layer: 0
   m_Name: App
   m_TagString: Untagged
@@ -71,7 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundLibrary: {fileID: 11400000, guid: 077cd7be670c6d54cb16f2c20be1c5d9, type: 2}
---- !u!114 &-9042150861625775508
+--- !u!114 &-5576342316104797672
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -80,12 +81,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3858678030340660513}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4778ef7f79a1754e936f764f34e5e51, type: 3}
+  m_Script: {fileID: 11500000, guid: e602fe14533a8ae4883dc689bb30534b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   useSteamTransport: 0
   maxPlayers: 8
   port: 26950
+  localPlayer: {fileID: 4917564644530240866, guid: dd313ace074b73d46936f5dbe4081cb4,
+    type: 3}
+  remotePlayer: {fileID: 8653414382081675723, guid: ff99b92c11b351f43a1534143e983f8e,
+    type: 3}
 --- !u!114 &-4845893212691351767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,3 +105,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   appID: 1722680
   useSteamInEditor: 1
+--- !u!114 &3755977251444370959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3858678030340660513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00829f95a53460c45a53bf91b89df69b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: {x: 200, y: 600}
+  position: {x: 20, y: 20}

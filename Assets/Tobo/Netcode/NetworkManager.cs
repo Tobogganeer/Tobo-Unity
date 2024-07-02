@@ -85,6 +85,12 @@ namespace Tobo.Net
             client.InitLocal();
             client.Disconnected += Disconnect;
 
+            if (!Application.runInBackground)
+            {
+                Application.runInBackground = true;
+                Debug.Log("Application not set to run in background. Please change this in the Player settings.");
+            }
+
             /*
             debug = (type, message) => {
                 Debug.Log("SOCKET - Type: " + type + ", Message: " + message);
@@ -377,7 +383,7 @@ namespace Tobo.Net
 
         protected virtual void OnDestroy()
         {
-            if (Instance != this) return; // In case this is destroyed on spawn
+            if (Instance != this || Quitting) return; // In case this is destroyed on spawn OR the game is stopping
 
             SinglePlayer = false;
 
