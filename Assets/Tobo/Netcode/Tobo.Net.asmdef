@@ -2,7 +2,9 @@
     "name": "Tobo.Net",
     "rootNamespace": "Tobo.Net",
     "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c"
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:09a37e0ee9494c442b6c3ddf7591c7c7",
+        "GUID:adc2e0741c6a95e428856f56c6864ff5"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,0 +1,10 @@
+LLAPI TODO:
+Ensure event order is same for Steam and socket backends
+Authentication (Steam account, server password, custom data) - includes "authenticated" flag for connections
+
+HLAPI TODO:
+NetworkObject: Stores the scene/net/asset ID. Has an owner and manages messages/rpcs for NetworkBehaviours. Spawns automatically. Can be serialized.
+NetworkPrefabManager: Stores all prefabs that can be spawned over the network. Possibility to specify different versions for local and remote objects (useful for players)
+NetworkBehaviour: Replacement for Monobehaviour. Comes with some net-specific callbacks/virtual fns. Can be serialized (array in NetworkID)
+NetworkTransform: Syncs the transform over the network. Let the owner do the syncing OR server control only.
+NetworkAnimator: Wrapper for Animator that networks the calls.

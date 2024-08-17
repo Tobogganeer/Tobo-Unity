@@ -29,6 +29,15 @@ public class TestNetManager : NetworkManager
 
         server.ClientConnected += SomeClientConnectedToServer;
         server.ClientDisconnected += SomeClientDisconnectedFromServer;
+
+        client.Connected += () => LogC("Connected");
+        client.Disconnected += () => LogC("Disconnected");
+        client.ClientConnected += (c) => LogC(c.Username + " connected");
+        client.ClientDisconnected += (c) => LogC(c.Username + " disconnected");
+        client.ConnectionFailed += () => LogC("Connected failed");
+
+        server.ClientConnected += (c) => LogS(c.Username + " connected");
+        server.ClientDisconnected += (c) => LogS(c.Username + " disconnected");
     }
 
     void SomeClientDisconnected(Client c)
@@ -74,8 +83,15 @@ public class TestNetManager : NetworkManager
 
     }
 
-    static void Log(string msg)
+    void LogC(string msg)
     {
-        Debug.Log("FOR TEST: " + msg);
+        string backend = useSteamTransport ? "Steam" : "Sockets";
+        Debug.Log($"Client ({backend}): {msg}");
+    }
+
+    void LogS(string msg)
+    {
+        string backend = useSteamTransport ? "Steam" : "Sockets";
+        Debug.Log($"Server ({backend}): {msg}");
     }
 }
