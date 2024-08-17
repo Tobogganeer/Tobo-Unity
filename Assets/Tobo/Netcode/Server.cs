@@ -64,12 +64,12 @@ namespace Tobo.Net
 
         protected abstract void Stop_Internal();
 
-        public void Kick(S_Client c)
+        public void Kick(S_Client c, string reason)
         {
             if (S_Client.All.ContainsKey(c.ID))
                 S_Client.All.Remove(c.ID);
 
-            c.Kick("Kicked");
+            c.Kick(reason);
         }
 
         internal void Destroy()
@@ -77,7 +77,7 @@ namespace Tobo.Net
             if (clients != null)
             {
                 foreach (S_Client c in clients.Values)
-                    c.Kick("Server Closed");
+                    c?.Kick("Server closing");
                 clients.Clear();
             }
 

@@ -383,7 +383,7 @@ namespace Tobo.Net
 
         protected virtual void OnDestroy()
         {
-            if (Instance != this || Quitting) return; // In case this is destroyed on spawn OR the game is stopping
+            if (Instance != this) return; // In case this is destroyed on spawn
 
             SinglePlayer = false;
 
@@ -399,19 +399,19 @@ namespace Tobo.Net
             }
             catch (Exception ex)
             {
-                Debug.LogError("Error terminating! " + ex);
-                throw;
+                Debug.LogError("Error closing NetworkManager! " + ex);
+            }
+            finally
+            {
+                // Close the sockets library (it checks if we initialized it)
+                Library.Deinitialize();
             }
         }
 
         protected virtual void OnApplicationQuit()
         {
             if (Instance == this)
-                Quitting = true;
-
-            Library.Deinitialize();
-            //Debug.Log("[SOCKETS]: Shutdown");
-            // I HATED THIS MESSAGE FOR SO LONG! WHY DID I EVER ADD IT AUHGGHHHHHH
+                Quitting = true; // Let us know we are closing so we don't send any more messages etc
         }
         #endregion
 
