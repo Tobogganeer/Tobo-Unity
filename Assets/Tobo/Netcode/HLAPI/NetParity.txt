@@ -1,0 +1,86 @@
+Steam:
+ - HOST (START)
+Server (Steam): Tobo connected
+Client (Steam): Connected
+
+ - HOST (C CONNECT)
+Server (Steam): build.virtualvoid connected
+Client (Steam): build.virtualvoid connected
+
+ - CLIENT (CONNECT)
+Client (Steam): Connected
+Client (Steam): Tobo connected
+
+ - HOST (C DISCONNECT)
+Server (Steam): build.virtualvoid disconnected
+Client (Steam): build.virtualvoid disconnected
+
+ - CLIENT (DISCONNECT)
+Client (Steam): Disconnected ====== Disconnect reason was App_Generic, might be a better one if possible
+
+ - HOST (REJOIN)
+Server (Steam): build.virtualvoid connected
+Client (Steam): build.virtualvoid connected
+
+ - CLIENT (REJOIN)
+Client (Steam): Connected
+Client (Steam): Tobo connected
+
+ - HOST (HOST LEAVE)
+Client (Steam): Disconnected ====== See App_Generic again
+
+ - CLIENT (HOST LEAVE)
+Client (Steam): Disconnected ====== Reason was '5010' here
+
+ - HOST (SHUTDOWN)
+Nothing ========== Had some lag
+
+ - CLIENT (SHUTDOWN)
+Client (Steam): Disconnected ========= Double call, both from OnConnectionChanged/SteamConnectionManager.cs:34
+^^^ Reason: AppException_Max, look into it
+
+Sockets:
+ - HOST (START)
+Server (Sockets): Player SV connected
+Client (Sockets): Connected
+
+ - HOST (C CONNECT)
+Server (Sockets): Player CL connected
+Client (Sockets): Player CL connected
+
+ - CLIENT (CONNECT)
+Client (Sockets): Connected
+Client (Sockets): Player SV connected
+
+ - HOST (C DISCONNECT)
+Server (Sockets): Player CL disconnected
+Client (Sockets): Player CL disconnected
+
+ - CLIENT (DISCONNECT)
+Client (Sockets): Disconnected
+
+ - HOST (REJOIN)
+Server (Sockets): Player CL connected
+Client (Sockets): Player CL connected
+
+ - CLIENT (REJOIN)
+Client (Sockets): Connected
+Client (Sockets): Player SV connected
+
+ - HOST (HOST LEAVE)
+Client (Sockets): Disconnected === Tobo.Net.SocketClient:Disconnect_Internal () (at Assets/Tobo/Netcode/SocketClient.cs:81)
+[LOCAL CLIENT]: Connection closed: Server closed
+Client (Sockets): Disconnected   === Tobo.Net.SocketClient:StatusChanged (Valve.Sockets.StatusInfo&) (at Assets/Tobo/Netcode/SocketClient.cs:177)
+
+ - CLIENT (HOST LEAVE)
+Client (Sockets): Disconnected === StatusChanged => Client:Disconnected_Raise => NetworkManager:Disconnect => etc => Disconnected_Raise
+Client (Sockets): Disconnected === StatusChanged => Disconnected_Raise
+
+ - HOST (SHUTDOWN)
+Nothing
+
+ - CLIENT (SHUTDOWN)
+Client (Sockets): Disconnected === StatusChanged => Client:Disconnected_Raise => NetworkManager:Disconnect => etc => Disconnected_Raise
+Client (Sockets): Disconnected === StatusChanged => Client:Disconnected_Raise
+
+

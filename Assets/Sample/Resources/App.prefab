@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e602fe14533a8ae4883dc689bb30534b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useSteamTransport: 0
+  useSteamTransport: 1
   maxPlayers: 8
   port: 26950
   localPlayer: {fileID: 4917564644530240866, guid: dd313ace074b73d46936f5dbe4081cb4,
