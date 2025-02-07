@@ -1,29 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Tobo.Audio.Sound;
 
 namespace Tobo.Audio
 {
     [CreateAssetMenu(menuName = "Scriptable Objects/Sound")]
-    public class Sound : ScriptableObject
+    public partial class Sound : ScriptableObject
     {
-        public enum ID : ushort
-        {
-            None = 0,
-            UIClick,
-            UIHover,
-            // Leaving room for different material types
-            LeftFootstep = 20,
-            RightFootstep = 30,
-            Drop = 40,
-            Jump = 50,
-
-            Item_Select_Generic,
-            Item_Drag_Generic,
-            Item_Drop_Generic,
-            SlotHover
-        }
-
         [SerializeField] private ID soundID;
         [SerializeField] private AudioClip[] clips;
         [SerializeField] private float maxDistance = 35f;
@@ -42,14 +26,32 @@ namespace Tobo.Audio
         public float MaxPitch => maxPitch;
         public bool Is2d => is2d;
 
-        public static Sound From(ID id)
+        public static Sound Get(string sound)
+        {
+            if (!SoundIDNameToSoundID.TryGetValue(sound, out ID id))
+                if (FilenameToSoundIDName.TryGetValue(sound, out sound))
+                    id = SoundIDNameToSoundID[sound];
+                else
+                {
+                    Debug.LogWarning("Couldn't find sound with ID: " + sound);
+                    return Get(ID.None);
+                }
+            return Get(id);
+        }
+
+        public static Audio Override(string sound)
+        {
+            return Get(sound).Override();
+        }
+
+        public static Sound Get(ID id)
         {
             return AudioManager.GetSound(id);
         }
 
         public static Audio Override(ID id)
         {
-            return From(id).Override();
+            return Get(id).Override();
         }
 
         public Audio Override()
@@ -75,6 +77,7 @@ namespace Tobo.Audio
             AudioManager.Play2D(this);
         }
 
+#if TOBO_NET
         public void PlayLocal(Vector3 position)
         {
             AudioManager.PlayLocal(this, position);
@@ -84,12 +87,15 @@ namespace Tobo.Audio
         {
             AudioManager.PlayLocal2D(this);
         }
-        #endregion
+#endif
+#endregion
 
-        public static Sound CreateInternal(List<AudioClip> clips, bool is2D, AudioCategory category)
+        internal static Sound CreateInternal(string name, List<AudioClip> clips, bool is2D, AudioCategory category)
         {
             Sound s = CreateInstance<Sound>();
 
+            s.name = name;
+            s.soundID = (ID)AudioCodegen.GetSoundIDBeforeCompilation(name);
             s.clips = clips.ToArray();
             s.is2d = is2D;
             s.category = category;
@@ -115,6 +121,7 @@ namespace Tobo.Audio
             AudioManager.Play2D(id);
         }
 
+#if TOBO_NET
         public static void PlayLocal(this Sound.ID id, Vector3 position)
         {
             AudioManager.PlayLocal(id, position);
@@ -124,5 +131,6 @@ namespace Tobo.Audio
         {
             AudioManager.PlayLocal2D(id);
         }
+#endif
     }
 }

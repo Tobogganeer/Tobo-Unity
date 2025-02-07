@@ -15,14 +15,27 @@ namespace Tobo.Audio
         //  AudioManager just had a Sound[]
         // Probably because it was in a prefab in resources or smth, idk
 
-        [Header("Fill through Menu")]
+        [Header("Fill through Menu (Audio/UpdateCurrentSounds)")]
         public Sound[] sounds;
 
 #if UNITY_EDITOR
-        [MenuItem("Audio/Fill Sounds")]
-        public static void FillSounds()
+        [MenuItem("Audio/Update Current Sounds")]
+        static void FillSounds()
         {
-            LibraryUtil.FillLibrary<SoundLibrary, Sound>(nameof(SoundLibrary.sounds));
+            SoundLibrary lib = LibraryUtil.FillLibrary<SoundLibrary, Sound>(nameof(SoundLibrary.sounds));
+            AudioCodegen.Generate(lib);
+        }
+
+        public static void FillAndGenerateSounds(bool generate = true)
+        {
+            SoundLibrary lib = LibraryUtil.FillLibrary<SoundLibrary, Sound>(nameof(SoundLibrary.sounds));
+            if (generate)
+                AudioCodegen.Generate(lib);
+        }
+
+        public static void Generate()
+        {
+            AudioCodegen.Generate(LibraryUtil.FindLibrary<SoundLibrary>());
         }
 #endif
     }

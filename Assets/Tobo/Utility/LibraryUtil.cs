@@ -27,9 +27,17 @@ namespace Tobo.Util.Editor
 
 
 
-        public static void FillLibrary<TLibrary, TObject>(string arrayName)
+        public static TLibrary FillLibrary<TLibrary, TObject>(string arrayName)
             where TLibrary : ScriptableObject
             where TObject : ScriptableObject
+        {
+            TLibrary lib = FindLibrary<TLibrary>();
+
+            FillScriptableObjects<TObject>(lib, arrayName);
+            return lib;
+        }
+
+        public static TLibrary FindLibrary<TLibrary>() where TLibrary : ScriptableObject
         {
             TLibrary[] libraries = FindAllScriptableObjectsOfType<TLibrary>();
             if (libraries.Length == 0)
@@ -40,8 +48,7 @@ namespace Tobo.Util.Editor
             {
                 Debug.LogWarning("More than one library of type " + typeof(TLibrary) + " found, filling only the first (" + libraries[0].name + ")...");
             }
-
-            FillScriptableObjects<TObject>(libraries[0], arrayName);
+            return libraries[0];
         }
 
         public static void FillScriptableObjects<T>(Object owner, string arrayName) where T : ScriptableObject
